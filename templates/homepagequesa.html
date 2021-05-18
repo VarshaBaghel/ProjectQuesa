@@ -1,0 +1,266 @@
+{% load static %}
+<!DOCTYPE HTML>
+<html lang="en">
+ <head>
+  <title>HOME</title>
+  <head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, maximum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Stunning CSS3</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<style>
+  body{
+    overflow-x: hidden;
+
+	padding: 50px 0px 0px 0px;
+	z-index: 0;
+	}
+   .navbar-dark{
+     background-color: white;
+	}
+   nav{
+     box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+	 }
+  .footer{
+     background-color: #D1C4E9;
+	 margin: 0px auto;
+	 padding: 20px 0px 20px 0px;
+	 }
+  .row-header{
+      margin: 0px auto;
+	  padding: 50px 0px 50px 0px;
+	  }
+   .row-content{
+      margin: 0px auto;
+	  padding-top: 70px;
+	  padding-bottom: 70px;
+	  }
+    .list-group-item{
+	   text-align: left;
+	   border-radius: 20px;
+	   margin-bottom: 5px;
+	   }
+	   
+	.right{
+	   float: right;
+	   padding-right: 40px;
+	}
+	.right img{
+	  height: 70px;
+	  width: 70px;
+	  border-radius: 50%;
+	  }
+	.user{
+	  margin-left: 60px;
+	  padding-bottom: 10px;
+	  }
+	.left{
+	  float: left;
+	  padding-left: 20px;
+	  }
+	.borderAll{
+	  box-sizing: border-box;
+	  border-style: solid;
+	  border-width: 1px;
+	  border-color: #dee0e1;
+	  border-radius: 3px;
+	  box-shadow: 0 1px 1px rgba(0,0,0,0.04);
+	  background-color: #fff;
+	  margin-bottom: 8px;
+	  margin-left: 20px;
+	  }
+	div{ 
+	  display: block;
+	  }
+	.innerCard{
+	   box-sizing: border-box;
+	   direction: ltr;
+	   padding-left: 15px;
+	   padding-right: 15px;
+	   position: relative;
+	   padding-bottom: 10px;
+	   padding-top: 10px;
+	   display: inline-block;
+	   min-width: 400px;
+	   }
+	   #myBtn {
+		display: none;
+		position: fixed;
+		bottom: 20px;
+		right: 30px;
+		z-index: 66;
+		font-size: 18px;
+		border: none;
+		outline: none;
+		background-color: #0a3047;
+		color: black;
+		cursor: pointer;
+		padding: 1px;
+		border-radius: 50%;
+		height: 30px;
+		width: 30px;
+	  }
+	  body{
+		background-image: url({% static 'images/bg3.jpg' %});
+		background-size : cover;
+		background-position : center;
+		background-attachment : fixed;
+		background-repeat : no-repeat;
+	  }
+
+</style>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+	<script>
+        function topFunction() {
+            document.body.scrollTop = 0;
+            document.documentElement.scrollTop = 0;
+        }
+
+        $(document).ready(function() {
+            var mybutton = document.getElementById("myBtn");
+            window.onscroll = function() {scrollFunction()};
+            function scrollFunction() {
+                if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+                mybutton.style.display = "block";
+                } else {
+                mybutton.style.display = "none";
+                }
+            }
+        });
+
+
+        $(document).ready(function() {
+            $(".btn.btn-info.btn-lg").click(function() {
+                var qid = $(this).attr('name');
+                $.ajax({
+                    url: "{% url 'like' %}",
+                    data: {
+                        'qid': qid,
+                    },
+                    dataType: "json",
+                    success: function(response) {
+                        $('#like_count' + qid).html(response.likes_count);
+                        $('#like_message' + qid).html(response.message);
+                    },
+                });
+            })
+        });
+
+
+        $(document).ready(function() {
+            setTimeout(function() {
+                $('#mymodal').fadeOut('slow');
+            }, 2000);
+        });
+    </script>
+
+
+<body>
+	{% if messages %}
+    <div class="modal" id="mymodal" style="display:inline-block" tabindex="-1" role="dialog" >
+        <div class="modal-dialog" role="document">
+            <div class="modal-body">
+                {% for msg in messages %}       
+                    <div class="alert alert-{{msg.level_tag}}" role="alert" style="background-color: rgb(168, 220, 255); color:#053e60; font-family: Arial, Helvetica, sans-serif;
+                    font-weight: bold; text-align: center; text-transform:uppercase;">
+                        {{msg.message}}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+  <nav class="navbar navbar-dark navbar-expand-sm fixed-top">
+     <div class="container">
+	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#Navbar">
+	    <span class="navbar-toggler-icon"></span>
+	  </button>
+	  <a class="navbar-brand mr-auto" height="30" width="41"><span style="color: #053e60; padding-right: 5px; font-size:25px; font-family:Verdana, Geneva, Tahoma, sans-serif;"><b>QUESA</span></a>
+	  <div class="collapse navbar-collapse" id="Navbar">
+	    <ul class="navbar-nav mr-auto">
+		 <li class="nav-item">
+		   <a class="nav-link active" href="{% url 'feed' %}"><span class="fa fa-home fa-lg" style="color: #0a3047"></span><span style="color:#0a3047; font-family:Verdana, Geneva, Tahoma, sans-serif;"> HOME</span></a>
+         </li>				
+		 <li class="col">
+		    <button type="button" class="btn btn-primary btn-sm" style="border-radius: 20px; background-color:#053e60; font-weight:bold; font-family:Verdana, Geneva, Tahoma, sans-serif;"><a href="{% url 'logout' %}" style="text-decoration: none; color: white;">LOGOUT</a></button>
+		 </li>
+		</ul>
+	  </div>
+	  
+	 </div>
+	</nav>
+	<div class="jumbotron jumbotron-fluid" style="background-image: url({% static 'images/bg3.jpg' %});
+	background-size : cover;
+	background-position : center;
+	background-attachment : fixed;
+	background-repeat : no-repeat;">
+	  <div class="row">
+	    <div class="col-sm-2">
+		 <div class="left">
+		   <div class="list-group">
+              <a class="list-group-item list-group-item-action active" style="border-radius: 20px;  background-color:#053e60;">
+				<i class="fa fa-navicon" style="font-size:24px; color:white;"></i><span style="padding-left: 5px; font-family:Verdana, Geneva, Tahoma, sans-serif; color:white;">GENRES</span>
+			  </a>
+			  {% for gen in genre %}
+              <a href="{% url 'specific' gen.id %}" class="list-group-item list-group-item-action" style=" border-radius: 20px;">
+                  <i class="fa fa-bullseye" style="font-size:15px"></i><span style="padding-left: 3px; font-family:Verdana, Geneva, Tahoma, sans-serif; text-transform: uppercase; font-size:14px;">{{gen.genre}}</span>     
+			  </a>
+			  {% endfor %}
+           </div>
+		  </div>
+		</div>
+		<div class="col-sm-7">
+			{% for ques in question %}
+			{% if ques.status %}
+		    <div class="card1 borderAll" style="box-sizing: border-box; direction: ltr;">
+				
+		    	<div class="innerCard">
+					<h2 style="text-align: justify; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-size:30px;" >{{ques.content}}</h2>
+                	<pre style="text-align: left; color: #939598; font-weight:bold; font-size:13px; padding-left:100px; padding-right:100px;">Asked by: {{ques.quser}}  <span style="display:inline-block; width: 170px;"></span> Answered by: {{ques.auser}}</pre>
+                	<hr>
+                	<p style="font-family: 'Times New Roman', Times, serif; font-style:normal; font-weight:bold;">{{ques.answer}}</p>
+                	<hr>
+                	<p id="like_count{{ques.id}}">{{ ques.likecount }}</p>
+                	<button id="{{ques.id}}" name="{{ques.id}}" class="btn btn-info btn-lg" type="button" value="like" style="background-color:#053e60;">
+                    	<span class="fa fa-thumbs-o-up" style="color: white;"></span>
+                    	Like
+                    	</button>
+                	<p id="like_message{{ques.id}}"></p>
+				</div>				
+			</div>
+			{% endif %}
+			{% endfor %}
+		</div>
+		
+
+		<div class="col-sm-3">
+		  <div class="right">
+		    <div class="user">
+		     <img src="{% static 'images/avatar.jpg' %}"><br><span style="margin-left: -16px; color: #0a3047; font-family:Verdana, Geneva, Tahoma, sans-serif;">{{ user.username }}</span>
+			</div>
+		   <div class="list-group">
+              <a href="{% url 'ask' %}" class="list-group-item list-group-item-action" style="border-radius: 20px;">
+                  <span style="padding-left: 5px;">ASK QUESTION</span>
+              </a>
+              <a href="{% url 'answer' %}" class="list-group-item list-group-item-action" style="border-radius: 20px;">
+                  <span style="padding-left: 5px;">ANSWER QUESTION</span>     
+              </a>
+			</div>
+		  </div>
+		</div>
+	  </div>
+	 </div>
+	 <button onclick="topFunction()" id="myBtn" title="Go to top"><i class="fa fa-chevron-up" style="color: rgb(150,206,243)"></i></button>
+
+	</body>
+</html>

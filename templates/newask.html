@@ -1,0 +1,167 @@
+{% load static %}
+<!DOCTYPE HTML>
+<html lang="en">
+ <head>
+  <title>Ask a question</title>
+  <head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, maximum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<style>
+  body{
+    overflow-x: hidden;
+
+	padding: 50px 0px 0px 0px;
+	z-index: 0;
+	}
+   .navbar-dark{
+     background-color: white;
+	}
+   nav{
+     box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+	 }
+  .footer{
+     background-color: #D1C4E9;
+	 margin: 0px auto;
+	 padding: 20px 0px 20px 0px;
+	 }
+  .row-header{
+      margin: 0px auto;
+	  padding: 50px 0px 50px 0px;
+	  }
+   .row-content{
+      margin: 0px auto;
+	  padding-top: 70px;
+	  padding-bottom: 70px;
+	  }
+    .list-group-item{
+	   text-align: left;
+	   border-radius: 20px;
+	   margin-bottom: 5px;
+	   }
+	   
+	.right{
+	   float: right;
+	   padding-right: 40px;
+	}
+	.right img{
+	  height: 70px;
+	  width: 70px;
+	  border-radius: 50%;
+	  }
+	.user{
+	  margin-left: 60px;
+	  padding-bottom: 10px;
+	  }
+	.left{
+	  float: left;
+	  padding-left: 20px;
+	  }
+	.borderAll{
+	  box-sizing: border-box;
+	  border-style: solid;
+	  border-width: 1px;
+	  border-color: #dee0e1;
+	  border-radius: 3px;
+	  box-shadow: 0 1px 1px rgba(0,0,0,0.04);
+	  background-color: #fff;
+	  margin-bottom: 8px;
+	  margin-left: 20px;
+	  }
+	div{
+	  display: block;
+	  }
+	.innerCard{
+	   box-sizing: border-box;
+	   direction: ltr;
+	   padding-left: 2px;
+	   padding-right: 2px;
+	   position: relative;
+	   padding-bottom: 4px;
+	   padding-top: 2px;
+	   display: inline-block;
+	   }
+	   body{
+		background-image: url({% static 'images/bg3.jpg' %});
+		background-size : cover;
+		background-position : center;
+		background-attachment : fixed;
+		background-repeat : no-repeat;
+	  }
+</style>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<body>
+  <nav class="navbar navbar-dark navbar-expand-sm fixed-top">
+     <div class="container">
+	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#Navbar">
+	    <span class="navbar-toggler-icon"></span>
+	  </button>
+	  <a class="navbar-brand mr-auto" height="30" width="41"><span style="color: #053e60; padding-right: 5px; font-size:25px; font-family:Verdana, Geneva, Tahoma, sans-serif;"><b>QUESA</span></a>
+	  <div class="collapse navbar-collapse" id="Navbar">
+	    <ul class="navbar-nav mr-auto">
+		 <li class="nav-item">
+		   <a class="nav-link active" href="{% url 'feed' %}"><span class="fa fa-home fa-lg" style="color: #0a3047"></span><span style="color: #0a3047; font-family:Verdana, Geneva, Tahoma, sans-serif;"> HOME</span></a>
+         </li>			 
+		 <li class="col">
+		    <button type="button" class="btn btn-primary btn-sm" style="border-radius: 20px; background-color:#053e60; font-weight:bold; font-family:Verdana, Geneva, Tahoma, sans-serif;"><a href="{% url 'logout' %}" style="text-decoration: none; color: white;">LOGOUT</a></button>
+		 </li>
+		</ul>
+	  </div>
+	  
+	 </div>
+	</nav>
+	<div class="jumbotron jumbotron-fluid" style="background-image: url({% static 'images/bg3.jpg' %});
+	background-size : cover;
+	background-position : center;
+	background-attachment : fixed;
+	background-repeat : no-repeat;">
+		<div class="col-sm-9" style="display: inline-block;">
+			<h2 style="font-family: 'Times New Roman', Times, serif;">Ask your question here:</h2>
+
+			<form action="question" method="POST">
+        	{% csrf_token %}
+        		<textarea name="question" rows="7" cols="100" spellcheck="true" placeholder="write your question here" required></textarea>
+        		<br><br>
+        		<label>Choose the genre:</label>
+        		<select name="genre">
+				{% for gen in genre %}
+					<option value="{{gen.id}}">{{gen.genre}}</option>
+				{% endfor %}
+				</select>
+        		<br><br>
+        		<label>Want to ask this question anonymously ?</label>
+        		<select name="anonymous">
+				<option value="yes">YES</option>
+				<option value="no">NO</option>
+				</select>
+        		<br><br>
+				<button type="submit" class="btn btn-primary btn-sm" style="border-radius: 20px; background-color:#053e60; font-weight:bold; font-family:Verdana, Geneva, Tahoma, sans-serif; color:white;">SAVE</button>
+    		</form>
+    	</div>
+		<div class="col-sm-3" style="display: inline-block; position:absolute;">
+		  	<div class="right">
+		    	<div class="user">
+		     		<img src="{% static 'images/avatar.jpg' %}"><br><span style="margin-left: -16px; color: #0a3047; font-family:Verdana, Geneva, Tahoma, sans-serif;">{{ user.username }}</span>
+				</div>
+		   		<div class="list-group">
+              		<a href="{% url 'ask' %}" class="list-group-item list-group-item-action" style="border-radius: 20px;">
+                  		<span style="padding-left: 5px">ASK QUESTION</span>
+              		</a>
+              		<a href="{% url 'answer' %}" class="list-group-item list-group-item-action" style="border-radius: 20px;">
+                  		<span style="padding-left: 5px">ANSWER QUESTION</span>     
+              		</a>
+				</div>
+		  	</div>
+		</div>
+	</div>
+</body>
+</html>

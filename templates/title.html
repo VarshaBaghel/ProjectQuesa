@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Quesa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/title.css' %}">
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<style>
+    body{
+        background-image: url({% static 'images/titleimg2.jpg' %});
+    }
+
+</style>
+
+<body>
+    {% if messages %}
+		<div class="modal" id="mymodal" style="display:inline-block" tabindex="-1" role="dialog" >
+			<div class="modal-dialog" role="document">
+				<div class="modal-body">
+					{% for msg in messages %}       
+						<div class="alert alert-{{msg.level_tag}}" role="alert" style="background-color: rgb(168, 220, 255); color:#053e60; font-family: Arial, Helvetica, sans-serif;
+                        font-weight: bold; text-align: center; text-transform:uppercase;">
+							{{msg.message}}
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+    {% endif %}
+    
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div id="content">
+                    <h1>Welcome To Quesa</h1>
+                    <h3>An Online Question-Answer App</h3>
+                    <hr>
+                    <button class="btn btn-default btn-lg" style=" border-style: solid; border-width: 3px; border-color:cadetblue; color:black; font-family: Arial, Helvetica, sans-serif;
+                    font-weight: bold;"><i class="fa fa-user"></i><a href="{% url 'login' %}" style="text-decoration: none;">Login</a></button>
+                    <button class="btn btn-default btn-lg" style=" border-style: solid; border-width: 3px; border-color:cadetblue; color:black; font-family: Arial, Helvetica, sans-serif;
+                    font-weight: bold;"><i class="fa fa-user-plus" style="color: black;"></i><a href="{% url 'signup' %}" style="text-decoration: none;">Sign Up</a></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</body>
+
+<script>
+    $(document).ready(function() {
+        setTimeout(function() {
+            $('#mymodal').fadeOut('slow');
+        }, 3000);
+    });
+
+</script>
+
+</html>

@@ -1,0 +1,162 @@
+{% load static %}
+<!DOCTYPE HTML>
+<html lang="en">
+ <head>
+  <title>Questions</title>
+  <head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, maximum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Stunning CSS3</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<style>
+  body{
+    overflow-x: hidden;
+
+	padding: 50px 0px 0px 0px;
+	z-index: 0;
+	}
+   .navbar-dark{
+     background-color: white;
+	}
+   nav{
+     box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+	 }
+  .footer{
+     background-color: #D1C4E9;
+	 margin: 0px auto;
+	 padding: 20px 0px 20px 0px;
+	 }
+  .row-header{
+      margin: 0px auto;
+	  padding: 50px 0px 50px 0px;
+	  }
+   .row-content{
+      margin: 0px auto;
+	  padding-top: 70px;
+	  padding-bottom: 70px;
+	  }
+    .list-group-item{
+	   text-align: left;
+	   border-radius: 20px;
+	   margin-bottom: 5px;
+	   }
+	   
+	.right{
+	   float: right;
+	   padding-right: 40px;
+	}
+	.right img{
+	  height: 70px;
+	  width: 70px;
+	  border-radius: 50%;
+	  }
+	.user{
+	  margin-left: 60px;
+	  padding-bottom: 10px;
+	  }
+	.left{
+	  float: left;
+	  padding-left: 20px;
+	  }
+	.borderAll{
+	  box-sizing: border-box;
+	  border-style: solid;
+	  border-width: 1px;
+	  border-color: #dee0e1;
+	  border-radius: 3px;
+	  box-shadow: 0 1px 1px rgba(0,0,0,0.04);
+	  background-color: #fff;
+	  margin-bottom: 8px;
+	  margin-left: 20px;
+	  }
+	div{
+	  display: block;
+	  }
+	.innerCard{
+	   box-sizing: border-box;
+	   direction: ltr;
+	   padding-left: 10px;
+	   padding-right: 10px;
+	   position: relative;
+	   padding-bottom: 10px;
+	   padding-top: 10px;
+	   display: inline-block;
+	   font-size: 20px;
+	   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+	   font-weight: bold;
+	   }
+	   body{
+		background-image: url({% static 'images/bg3.jpg' %});
+		background-size : cover;
+		background-position : center;
+		background-attachment : fixed;
+		background-repeat : no-repeat;
+	  }
+</style>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<body>
+  <nav class="navbar navbar-dark navbar-expand-sm fixed-top">
+     <div class="container">
+	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#Navbar">
+	    <span class="navbar-toggler-icon"></span>
+	  </button>
+	  <a class="navbar-brand mr-auto" height="30" width="41"><span style="color: #053e60; padding-right: 5px; font-size:25px; font-family:Verdana, Geneva, Tahoma, sans-serif;"><b>QUESA</span></a>
+	  <div class="collapse navbar-collapse" id="Navbar">
+	    <ul class="navbar-nav mr-auto">
+		 <li class="nav-item">
+		   <a class="nav-link active" href="{% url 'feed' %}"><span class="fa fa-home fa-lg" style="color: #0a3047"></span><span style="color: #0a3047; font-family:Verdana, Geneva, Tahoma, sans-serif;"> HOME</span></a>
+         </li>			
+		 <li class="col">
+		    <button type="button" class="btn btn-primary btn-sm" style="border-radius: 20px; background-color:#053e60; font-weight:bold; font-family:Verdana, Geneva, Tahoma, sans-serif;"><a href="{% url 'logout' %}" style="text-decoration: none; color: white;">LOGOUT</a></button>
+		 </li>
+		</ul>
+	  </div>
+	  
+	 </div>
+	</nav>
+	<div class="jumbotron jumbotron-fluid" style="background-image: url({% static 'images/bg3.jpg' %});
+	background-size : cover;
+	background-position : center;
+	background-attachment : fixed;
+	background-repeat : no-repeat;">
+	  <div class="row">
+		<div class="col-sm-9">
+			{% for ques in question %}
+		    <div class="card1 borderAll" style="box-sizing: border-box; direction: ltr;">
+				
+		    	<div class="innerCard">
+					<a href="{% url 'answerpage' ques.id %}" style="text-decoration: none; color: black;"><i class="fa fa-snowflake-o" aria-hidden="true"></i>&nbsp;{{ques.content}}</a>
+				</div>
+			</div>
+			{% endfor %}
+		</div>
+		
+
+		<div class="col-sm-3">
+		  <div class="right">
+		    <div class="user">
+		     <img src="{% static 'images/avatar.jpg' %}"><br><span style="margin-left: -16px; color: #0a3047; font-family:Verdana, Geneva, Tahoma, sans-serif;">{{ user.username }}</span>
+			</div>
+		   <div class="list-group">
+              <a href="{% url 'ask' %}" class="list-group-item list-group-item-action" style="border-radius: 20px;">
+                  <span style="padding-left: 5px">ASK QUESTION</span>
+              </a>
+              <a href="{% url 'answer' %}" class="list-group-item list-group-item-action" style="border-radius: 20px;">
+                  <span style="padding-left: 5px">ANSWER QUESTION</span>     
+              </a>
+			</div>
+		  </div>
+		</div>
+	  </div>
+	 </div>
+</body>
+</html>
